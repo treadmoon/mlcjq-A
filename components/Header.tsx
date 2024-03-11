@@ -1,12 +1,16 @@
+"use client"
+
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
+import { usePathname } from 'next/navigation'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 
 const Header = () => {
+  const pathname = usePathname()
   return (
     <header className="flex items-center justify-between py-10">
       <div>
@@ -32,7 +36,8 @@ const Header = () => {
             <Link
               key={link.title}
               href={link.href}
-              className="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
+              className={`hidden font-medium text-gray-900 dark:text-gray-100 sm:block 
+              ${pathname === link.href ? 'text-primary-400' : ''}`}
             >
               {link.title}
             </Link>

@@ -1,17 +1,17 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Next.js Starter Blog',
-  author: 'Tails Azimuth',
-  headerTitle: 'TailwindBlog',
-  description: 'A blog created with Next.js and Tailwind.css',
-  language: 'en-us',
+  title: 'mlcjq blog',
+  author: 'stukill may',
+  headerTitle: '开发笔记',
+  description: '记录一下怕忘了',
+  language: 'zh_CN',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteUrl: 'http://mlcjq.com', //线上地址
+  siteRepo: 'http://mlcjq.com', //项目地址
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
-  mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'address@yoursite.com',
+  mastodon: 'http://mlcjq.com',
+  email: 'mlvae@qq.com',
   github: 'https://github.com',
   twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com',
@@ -19,7 +19,7 @@ const siteMetadata = {
   linkedin: 'https://www.linkedin.com',
   threads: 'https://www.threads.net',
   instagram: 'https://www.instagram.com',
-  locale: 'en-US',
+  locale: 'zh-Hans-CN', //时区值
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
