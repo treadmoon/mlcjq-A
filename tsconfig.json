@@ -39,7 +39,9 @@
     "**/*.json",
     ".contentlayer/generated",
     ".contentlayer/generated/**/*.json",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "components/TOCInline/TOCInline.js",
+    "components/TOCInline/TOCInline.d.ts"
   ],
   "exclude": ["node_modules"]
 }

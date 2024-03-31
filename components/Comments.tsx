@@ -8,10 +8,12 @@ export default function Comments({ slug }: { slug: string }) {
   const [loadComments, setLoadComments] = useState(false)
   return (
     <>
-      {!loadComments && <button onClick={() => setLoadComments(true)}>
-        {/* Load Comments */}
-        {/* 加载注释 */}
-      </button>}
+      {!loadComments && (
+        <button onClick={() => setLoadComments(true)}>
+          {/* Load Comments */}
+          {/* 加载注释 */}
+        </button>
+      )}
       {siteMetadata.comments && loadComments && (
         <CommentsComponent commentsConfig={siteMetadata.comments} slug={slug} />
       )}

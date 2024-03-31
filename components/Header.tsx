@@ -1,13 +1,13 @@
-"use client"
+'use client'
 
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
 import { usePathname } from 'next/navigation'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import Image from 'next/image'
 
 const Header = () => {
   const pathname = usePathname()
@@ -17,8 +17,7 @@ const Header = () => {
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
             <div className="mr-3">
-              {/* <Logo /> */}
-              <img src="/static/images/avatar.png" alt="LOGO" />
+              <Image src="/static/images/avatar.png" alt="LOGO" />
             </div>
             {typeof siteMetadata.headerTitle === 'string' ? (
               <div className="hidden h-6 text-2xl font-semibold sm:block">

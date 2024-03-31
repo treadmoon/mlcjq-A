@@ -1,23 +1,23 @@
-import * as react_jsx_runtime from 'react/jsx-runtime';
+import * as react_jsx_runtime from 'react/jsx-runtime'
 
 type TocItem = {
-    value: string;
-    url: string;
-    depth: number;
-};
-type Toc = TocItem[];
+  value: string
+  url: string
+  depth: number
+}
+type Toc = TocItem[]
 
 interface TOCInlineProps {
-    toc: Toc;
-    fromHeading?: number;
-    toHeading?: number;
-    asDisclosure?: boolean;
-    exclude?: string | string[];
-    collapse?: boolean;
-    ulClassName?: string;
+  toc: Toc
+  fromHeading?: number
+  toHeading?: number
+  asDisclosure?: boolean
+  exclude?: string | string[]
+  collapse?: boolean
+  ulClassName?: string
 }
 interface NestedTocItem extends TocItem {
-    children?: NestedTocItem[];
+  children?: NestedTocItem[]
 }
 /**
  * Generates an inline table of contents
@@ -39,6 +39,14 @@ interface NestedTocItem extends TocItem {
  * }
  *
  */
-declare const TOCInline: ({ toc, fromHeading, toHeading, asDisclosure, exclude, collapse, ulClassName, }: TOCInlineProps) => react_jsx_runtime.JSX.Element;
+declare const TOCInline: ({
+  toc,
+  fromHeading,
+  toHeading,
+  asDisclosure,
+  exclude,
+  collapse,
+  ulClassName,
+}: TOCInlineProps) => react_jsx_runtime.JSX.Element
 
-export { NestedTocItem, TOCInlineProps, TOCInline as default };
+export { NestedTocItem, TOCInlineProps, TOCInline as default }
