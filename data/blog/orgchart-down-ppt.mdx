@@ -1,0 +1,199 @@
+---
+title: '结构图插件系列：导出PPT'
+date: '2021-08-03'
+lastmod: '2021-08-03'
+tags: ['plugin', 'chart','ppt']
+draft: false
+summary: '结构图插件系列：导出PPT'
+images: ['/static/images/twitter-card.png']
+---
+
+#### PPT文件构造
+想在ppt内绘制组织结构图，就要了解ppt文件的组成和构造。我们把ppt后缀改成.zip，然后解压缩，得到如下所示若干文件：
+
+<img src="/static/images/blog/ppt3.png" />
+<img src="/static/images/blog/ppt2.png" />
+<img src="/static/images/blog/ppt1.png" />
+
+大概查了下文档，以下是PPT文件的主要XML文件：
+- **presentation.xml**：存储演示文稿的基本信息，例如幻灯片顺序、主题、幻灯片母版等。
+* **slide**.xml：存储每个幻灯片的内容，例如文本、形状、图片、视频等。
+* **notes**.xml：存储幻灯片的备注。
+* **handout**.xml：存储幻灯片的讲义。
+* **theme**.xml：存储演示文稿的主题信息。
+* **styles**.xml：存储演示文稿的样式信息。
+* **settings**.xml：存储演示文稿的设置信息。                
+
+
+#### 分析**slide**.xml
+
+那么，主要研究**slide**.xml就可以了。
+
+首先再ppt内绘制一个简单的组织结构图，最好涵盖所有情况，为了便于分析，每一页我画了一种情况。
+然后解压出来，分析对应的**slide**.xml就可以了。
+
+绘制组织结构图需要用到一下元素：文本、图片、矩形、肘线、组合
+
+所以，只要弄懂这些元素，就可以向开发html一样，绘制ppt了。
+
+下面就来分析一下这个xml结构
+
+#### 文本
+通过分析`XML`可以获取文字基本构成属性：`id x y fontSize fontWeight color 文`本。
+```xml
+<p:sp>
+    <!-- id -->
+    <p:nvSpPr>
+        <p:cNvPr id="29" name="Object5" descr="文本：29"></p:cNvPr>
+        <p:cNvSpPr />
+        <p:nvPr></p:nvPr>
+    </p:nvSpPr>
+    <p:spPr>
+        <a:xfrm>
+            <!-- 坐标 -->
+            <a:off x="4626864" y="1572768" />
+            <a:ext cx="1755648" cy="256032" />
+        </a:xfrm>
+        <a:prstGeom prst="roundRect">
+            <a:avLst>
+                <a:gd name="adj" fmla="val 7143" />
+            </a:avLst>
+        </a:prstGeom>
+        <a:noFill />
+        <a:ln>
+            <a:prstDash val="solid" />
+        </a:ln>
+    </p:spPr>
+    <p:txBody>
+        <a:bodyPr wrap="square" anchor="ctr" vert="horz"></a:bodyPr>
+        <a:lstStyle />
+        <a:p>
+            <a:pPr algn="ctr"></a:pPr>
+            <a:r>
+                <!-- sz:fontSize -->
+                <!-- b:fontWeight -->
+                <a:rPr lang="en-US" sz="1000" b="1" spc="20" kern="0" dirty="0">
+                    <a:solidFill>
+                        <!-- color -->
+                        <a:srgbClr val="212121" />
+                    </a:solidFill>
+                </a:rPr>
+                <!-- 文本内容 -->
+                <a:t>tiTianjinpairsTianjintiL…</a:t>
+            </a:r>
+            <a:endParaRPr lang="en-US" sz="966" dirty="0" />
+        </a:p>
+    </p:txBody>
+</p:sp>
+```
+
+#### 图片
+通过分析`XML`可以获取图片基本构成属性：`id x y src`。
+```xml
+<p:pic>
+    <p:nvPicPr>
+        <!-- src -->
+        <p:cNvPr id="6" name="Object 6" descr="/src/example/org/img/pbk.png"> </p:cNvPr>
+        <p:cNvPicPr>
+            <a:picLocks noChangeAspect="1" />
+        </p:cNvPicPr>
+        <p:nvPr></p:nvPr>
+    </p:nvPicPr>
+    <p:blipFill>
+        <a:blip r:embed="rId6" />
+        <a:stretch>
+            <a:fillRect />
+        </a:stretch>
+    </p:blipFill>
+    <p:spPr>
+        <a:xfrm>
+            <!-- x,y -->
+            <a:off x="4681728" y="1892808" />
+            <a:ext cx="329184" cy="329184" />
+        </a:xfrm>
+        <a:prstGeom prst="rect">
+            <a:avLst />
+        </a:prstGeom>
+    </p:spPr>
+</p:pic>
+```
+
+#### 矩形
+可通过空白的文本框代替，设置`fill`（填充） `line`（边框）
+```xml
+<!-- fill -->
+<a:solidFill>
+    <a:srgbClr val="FFFFFF" />
+</a:solidFill>
+<!-- line -->
+<a:ln w="6350">
+    <a:solidFill>
+        <a:srgbClr val="D9D9D9" />
+    </a:solidFill>
+    <a:prstDash val="solid" />
+</a:ln>
+```
+
+#### 肘线
+肘线（可连续拐弯的线）,绘制肘线需要：
+来源（`stCxn`）、目标（`endCxn`）、连接点（上下左右）、拐弯点（百分比）。
+```xml
+<p:nvCxnSpPr>
+    <p:cNvPr id="5" name="肘形连接符 30" descr="肘形连接符5" />
+    <p:cNvCxnSpPr>
+        <a:cxnSpLocks />
+        <!-- 来源元素id -->
+        <!-- idx:2 元素下方开始 -->
+        <a:stCxn id="2" idx="2" />
+        <!-- 目标元素id -->
+        <!-- idx:0 元素上方方衔接 -->
+        <a:endCxn id="3" idx="0" />
+    </p:cNvCxnSpPr>
+    <p:nvPr />
+</p:nvCxnSpPr>
+
+<!-- flipH横向 -->
+<!-- flipV纵向 -->
+<!-- 这个规则还没完全弄懂，设计到旋转角度等 -->
+<a:xfrm rot="5400000" flipH="1" flipV="1">
+    <a:off x="3886200" y="886968" />
+    <a:ext cx="438912" cy="932688" />
+</a:xfrm>
+<!-- bentConnector2 两段线，拐1下 -->
+<!-- bentConnector3 三段线，拐2下 -->
+<a:prstGeom prst="bentConnector3">
+    <a:avLst></a:avLst>
+</a:prstGeom>
+```
+
+#### 组合
+画出来的元素时松散的，我们需要组合起来，才会在查看操作的时候，不至于乱成一团。
+用组合标签`grpSp`将其他内容包裹起来，组合标签的属性`grpSpPr`中，可以设置坐标、宽高。
+```xml
+<p:grpSp>
+    <p:nvGrpSpPr>
+        <p:cNvPr id="9999999" name="undefined">
+            <a:extLst>
+                <a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}">
+                    <a16:creationId
+                        xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main"
+                        id="{03652813-AFAE-4D46-BDC4-0B7926DEE2B9}" />
+                </a:ext>
+            </a:extLst>
+        </p:cNvPr>
+        <p:cNvGrpSpPr />
+        <p:nvPr />
+    </p:nvGrpSpPr>
+    <p:grpSpPr>
+        <a:xfrm>
+            <a:off x="2816352" y="1572768" />
+            <a:ext cx="1645920" cy="731520" />
+            <a:chOff x="2816352" y="1572768" />
+            <a:chExt cx="1645920" cy="731520" />
+        </a:xfrm>
+    </p:grpSpPr>
+    <!-- 被组合包裹的内容 -->
+</p:grpSp>
+```
+
+最终将这些`XML`组合起来，写入到**slide**.xml中，就是一页`PPT`了。将内容生成文件用到了`JSZip`插件。

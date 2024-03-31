@@ -1,0 +1,110 @@
+---
+title: '面向苍穹开发的脚手架：打包优化'
+date: '2023-04-09'
+lastmod: '2023-04-09'
+tags: ['node', 'webpack', 'performance']
+draft: false
+summary: '苍穹平台自定义控件会把所有的项目文件和引用打打包到一个文件'
+images: ['/static/images/twitter-card.png']
+---
+
+苍穹平台自定义控件会把所有的项目文件和引用打打包到一个文件，如：每个项目都重复打包`reatc`、`UI`库等。
+平台只会按照特定路径，加载该自定义控件对应的打包文件`index.js`。
+如果分包，平台不会加载分出来的其他包，而且也没有预留接口，准许接入其他文件。
+自定义控件初衷可能只是画小组件，奈何低代码页面太丑，需要定制绘制的页面越来越多，越来越复杂。
+
+<TOCInline toc={props.toc}  />
+
+### 平台模板
+自定义控件开发，平台部给了个模板，大概长这样
+```js
+import React from "react"
+(function(api){
+  function InitModel(model){
+    this.model=model
+  }
+
+  InitModel.prototype={
+    init(props){
+      // 初始化发送数据给前端
+      // 除index.js外，其他文件是这样动态将文件插入到项目页面的。
+      this.model.loadfile(["./css/index.css"],()=>{
+        // 有个属性：this.model.dom。平台给的容器，相当于<div id="app"></div>
+        this.model.dom="<div>内容</div>"
+      })
+    }
+    update(props){
+      // 后续更新发送数据
+      // 在这里接受新数据，然后去更新this.model.dom的内容
+    }
+  }
+
+  // 注册一下使用
+  api.register("控件名称",InitModel)
+})(window.api)
+```
+
+由于自定义控件越来越多，实在太多，整个项目包的体积过大，必须想办法优化一下。苍穹平台没有这方面的规划（叫不动）！
+只能自己来尝试了。
+
+### 如何解决
+
+#### 尝试一
+
+- 首先，我采用了`externals`将`react`包提出来。然后用动态`this.model.loadfile`脚本插入。
+但是问题马上来了，webpack是从顶部开始解析的，遇到`import React from "react"`直接找不到`react`了报错。
+
+#### 尝试二
+
+- 然后想到了不是办法的办法，那么我就用`this.model.loadfile`这个`API`吧，毕竟平台给的。不用`import react`了，
+直接回归本质，在`loadfile`回调里使用`react`。如：
+```js
+const [count,setCount]=React.usestate(0)
+```
+但是终究还是觉得太`low`了，虽然有用，但是放弃了;
+
+#### 尝试三
+
+- 那么只能从webpack入手了，重写了一个`loadfile(["./react.js","./react-dom.js"]，callback)`方法。
+而callback里面，正是`webpack`打包后的内容。
+也就是说，等`react`等文件在页面加载后，再执行自定义控件项目。
+但是，问题又来了，尝试之后，`react`等公共包确实在页面加载了，但是自定义控件没有加载。
+原来平台在第一次事件循环中找到`api.register("控件名称",InitModel)`,然后执行`InitModel`。
+如果`api.register("控件名称",InitModel)`放在异步回调里面，平台就不会执行了，又失败了。
+
+#### 解决
+
+- 既然已经走到这里，怎么能收手呢。于是，我继续在`webpack`插件里搞动作。我直接把平台模板提取出来，大概这样做：
+```js
+(function(api){
+  // 我用class代替了构造函数
+  class InitModel{
+    constructor(model){
+      this.model=model
+    }
+    init(props){
+      this.model.loadfile(["./css/index.css"],()=>{
+        // I18N kdAjax loadFile在这里定义,相当于打包的内容的全局变量
+        // 这里放webpack打包的内容
+        // content 
+      })
+    }
+    update(props){}
+  }
+
+  // 注册一下使用
+  api.register("控件名称",InitModel)
+})(window.api)
+
+// webpack打包的内容
+// I18N kdAjax loadFile都是我封装的方法
+import React from "react"
+ReactDOM.createRoot(model.dom).render(
+  <App data={{}} I18N={I18N} kdAjax={kdAjax} loadFile={loadFile} />,
+);
+```
+自定义控件按照常规开发项目方式开发，再把`webpack`打包后的内容，放到自定义控件的框架里执行。
+至此，基本解决主要问题。而且，客户二开，再也看不到半点苍穹的影子，几乎0学习负担。
+
+#### 其他问题
+加载`react`等公共包时，要防止重复添加，所以添加时要做监听和判断。

@@ -1,0 +1,264 @@
+---
+title: '面向苍穹开发的脚手架'
+date: '2023-01-09'
+lastmod: '2023-01-09'
+tags: ['node', 'webpack', 'cli']
+draft: false
+summary: '面向苍穹开发的脚手架'
+images: ['/static/images/twitter-card.png']
+---
+
+苍穹平台是一个低代码平台，一般不需要前端画页面。
+当前端页面比较复杂、或需要个性化定制的时候，就需要前端进行开发。
+前端开发的页面嵌入到平台使用，这个嵌入的项目，叫自定义控件。
+
+<TOCInline toc={props.toc}  />
+
+#### 平台模板
+平台部给了个模板，大概长这样
+```js
+(function(api){
+  function InitModel(model){
+    this.model=model
+  }
+
+  InitModel.prototype={
+    init(props){
+      // 初始化发送数据给前端
+      // 有个属性：this.model.dom。平台给的容器，相当于<div id="app"></div>
+      this.model.dom="<div>内容</div>"
+    }
+    update(props){
+      // 后续更新发送数据
+      // 在这里接受新数据，然后去更新this.model.dom的内容
+    }
+  }
+
+  // 注册一下使用
+  api.register("控件名称",InitModel)
+})(window.api)
+```
+
+每次开发都是靠复制这个模板，口口相传，没有体系化的工具。而且里面有一堆苍穹平台规则、以及奇怪的前后端数据交互模式。
+自己员工还好，客户二开看到就头疼，一头疼就一直问我们，然后我们也头疼。
+为了方便开发提高效率，为了服务好我们的客户，我开发了一个前端`cli`解决一系列问题。
+
+
+#### 解决新建项目繁琐问题
+
+直接用命令行拉取本地或远程模板了
+`npm run add demo`
+`demo`就是项目名，对应下方的`projectName`。
+下面是部分`node`脚本：
+1. 输入新建控件名
+```js
+program
+  .command("create <project-name>")
+  .description("创建一个新的项目")
+  .action((projectName) => {
+    console.log("新增自定义控件：", projectName);
+    selectTemplate(projectName);
+  });
+```
+2. 通过交互命令选择本地模板或者拉取远程代码
+```js
+// 获取本地模板代码
+async function writeFileTree(dir, files) {
+  Object.keys(files).forEach((name) => {
+    const filePath = path.join(dir, name);
+    fse.ensureDirSync(path.dirname(filePath));
+    fse.writeFileSync(filePath, files[name]);
+  });
+}
+
+// 获取远程代码
+download(`direct:${remoteLink}`, targetPath, { clone: true }, (err) => {
+    if (err) {
+      console.error("下载错误：", err);
+    } else {
+      console.log("下载成功！");
+      const currTemplateSrc = path.resolve(targetPath);
+      create(projectName, projectName, currTemplateSrc);
+    }
+  });
+
+//   用ejs，把第一步的projectName变量写入到模板对应位置。
+ejs.render(content, ejsOptions);
+```
+#### 项目启动和打包问题
+
+平台给的模板，多个项目可以放在一起，但是不能选择性启动，只能全量启动。
+全量启动或打包，肯定影响效率，浪费性能的。脚手架改进后，在开发项目时，可进行选择启动和打包。
+可以选择本次操作的类型，以及选择本次操作的控件：
+```js
+const questions = [
+  {
+    type: "list",
+    message: "选择本次操作的类型:",
+    name: "optype",
+    // 苍穹调试、本地调试、苍穹打包、本地打包
+    choices: ["dev", "dev:pre", "build", "build:pre"],
+  },
+  {
+    type: "checkbox",
+    message: "选择本次操作的控件:",
+    name: "projectName",
+    // 列出所有项目
+    choices: Object.keys(entrysMap),
+  },
+];
+// const { prompt } = require("inquirer");
+prompt(questions).then((answer) => {
+  const command = `npm run ${answer.optype} --handle=${answer.projectName}`;
+  console.log(chalk.blue(`执行：${command}`));
+  shell.exec(command);
+});
+```
+
+
+#### 前后端交互很难用
+
+如上面的模板所示，初始化数据在`init`方法（钩子）接受。后续所有的数据都在`update`接受。
+自定义控件的初衷，可能就是开发小组件，所以这样也没什么问题，数据少，每次全量更新。但是，自定义控件终究
+变成了自定义项目了。所以，我们需要有类似`Ajax`数据交互一样的体验。
+通过发布订阅模式，实现了个KDAjax类，在`update`钩子里，接受到数据后，根据前后端定义好的`eventName`发布订阅：大量用于事件监听和回调，使用户和插件交互主要方式。
+而在需要数据的地方，订阅对应的`eventName`。`eventName`相当于请求`url`了。
+```js
+export default class KDAjax {
+  constructor(model) {
+    this.model = model;
+
+    this.eventMap = {};
+  }
+
+  // 仅发送请求
+  invoke(eventName, params) {
+    this.model.invoke(eventName, params);
+  }
+
+  // 发送请求后，获取结果
+  req(eventName, params) {
+    return new Promise((resolve, reject) => {
+      this.model.invoke(eventName, params);
+      this.eventMap[eventName] = {
+        resolve,
+        reject,
+      };
+    });
+  }
+
+  // 仅获取结果
+  res(eventName) {
+    return new Promise((resolve, reject) => {
+      this.eventMap[eventName] = {
+        resolve,
+        reject,
+      };
+    });
+  }
+
+  // 订阅
+  sub(eventName, callback) {
+    this.eventMap[eventName] = {
+      resolve: callback,
+    };
+  }
+
+  // 发布
+  pub(props) {
+    const {
+      code = "500",
+      data = null,
+      eventName = "",
+      eventStatus = "init",
+      success = true,
+    } = props?.data ?? {};
+
+    const { resolve = null, reject = null } = this.eventMap[eventName];
+
+    if (code == 200 && success) {
+      resolve(data);
+    } else {
+      reject(data);
+    }
+
+    this.eventMap[eventName] = null;
+  }
+
+  destroyed() {
+    this.eventMap = null;
+  }
+}
+
+// 使用
+const kdAjax=new KDAjax()
+kdAjax.req("eventName",params).then(result=>{
+  // 处理结果
+})
+```
+#### 不能本地开发调试
+现有模板不能在本地预览页面，不能契合苍穹效果。不能热更新调试，需要手动刷新，点击导航进入对应的模块。
+
+这个比较简单，苍穹调试打包不动。
+本地调试预览，只要再加一个入口即可，将最外层的`dom`挂到`index.html`里面，而不是苍穹给的`this.model.dom`上。
+再结合`mock`模拟一下苍穹数据交互，需模拟请求数据、接受苍穹推送数据。
+
+#### 手动发包繁琐低效。
+编写`node`脚本，代替手动操作就好了；通过交互命令选择要发布的项目和分支，用`execa`执行`git`命令：
+```js
+const questions = [
+    {
+      type: "list",
+      message: "选择发布的分支:",
+      name: "envname",
+      choices: [...branchs, "其他"],
+    },
+    {
+      type: "input",
+      name: "branchName",
+      message: "请输入分支名称？",
+      when: (answers) => answers.envname === "其他",
+    },
+    {
+      type: "checkbox",
+      message: "选择发布的控件:",
+      name: "projectName",
+      choices: Object.keys(entrysMap),
+    },
+  ];
+
+  prompt(questions).then((answer) => {
+    let branchName = answer.envname;
+    if (answer.envname === "其他") {
+      branchName = answer.branchName;
+      console.log(chalk.blue(`发布的分支：${branchName}`));
+    }
+
+    spinner.start("切换分支并拉取最新代码！");
+
+    changeBranch(branchName).then((res) => {
+      answer.projectName.map((name) => {
+        spinner.succeed();
+
+        copyFileForGit(name);
+      });
+    });
+  });
+  ```
+
+
+#### 常用Node脚本
+
+- `assert`：node:assert 模块提供了一组用于验证不变量的断言函数。
+- `commander`解析命令行参数、处理选项和生成帮助信息。
+- `inquirer`解析命令行参数、处理选项和生成帮助信息，主要用于问答，可以看做命令行表单。
+- `download-git-repo`拉取`git`仓的代码
+- `globby`查找文件和目录，根据模式匹配文件路径。
+- `fs-extra`fs封装和拓展，如递归创建目录、复制文件和目录、删除文件和目录等。
+- `chalk`终端log颜色
+- `semver`验证、比较和操作版本号，以及解析和格式化版本字符串。
+- `rimraf`深度删除，删除文件、目录
+- `isbinaryfile`检测是否二进制文件
+- `execa`可代替`child_process`执行外部命令
+- `ejs`模板引擎，注入变量到html中
+- `ora`终端加载动画

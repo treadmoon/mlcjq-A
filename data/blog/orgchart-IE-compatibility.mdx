@@ -1,0 +1,108 @@
+---
+title: '结构图插件系列：兼容IE11'
+date: '2021-10-21'
+lastmod: '2021-10-21'
+tags: ['IE11', 'SVG']
+draft: false
+summary: '结构图插件系列：兼容IE11'
+images: ['/static/images/twitter-card.png']
+---
+
+开发完结构图插件后，沾沾自喜了一段时间，直到产品演示会时，领导灵魂一击：兼容IE吗？
+作为HR系统软件，传统行业的客户还是很多的，IE是必须兼容的？
+
+
+<TOCInline toc={props.toc}  />
+
+#### 问题汇总
+结构图插件遇到了哪些IE兼容问题。
+
+* 箭头函数
+* `append()`和`appendChild`
+* 鼠标事件的`offsetX`、`offsetY`、`movementX`、`movementY`
+* 鼠标滚轮事件`wheelData`
+* 浏览器窗口宽高计算
+* SVG字体图标
+
+#### 箭头函数
+
+IE浏览器不支持箭头函数。如果您的代码使用了箭头函数，则需要使用其他语法来代替。例如，可以将箭头函数转换为普通函数：
+
+```javascript
+// 使用箭头函数
+const add = (x, y) => x + y;
+
+// 转换为普通函数
+function add(x, y) {
+  return x + y;
+}
+```
+
+#### append和appendChild
+
+IE浏览器支持`appendChild`方法，但**不支持`append()`方法**。如果您的代码使用了`append()`方法，则需要使用`appendChild`方法来代替：
+
+```javascript
+// 使用 append() 方法
+parent.append(child);
+
+// 转换为 appendChild() 方法
+parent.appendChild(child);
+```
+
+#### 鼠标事件
+
+IE浏览器对鼠标事件的`offsetX`、`offsetY`、`movementX`、`movementY`属性的支持不完全。在IE9及更早版本中，这些属性的值始终为0。
+
+为了在IE浏览器中获得正确的鼠标坐标，可以使用以下方法：
+
+```javascript
+// 获取鼠标相对于目标元素的坐标
+const x = event.clientX - target.getBoundingClientRect().left;
+const y = event.clientY - target.getBoundingClientRect().top;
+
+// 获取鼠标移动的距离
+const dx = event.movementX || event.clientX - lastX;
+const dy = event.movementY || event.clientY - lastY;
+
+// 更新上次鼠标的位置
+lastX = event.clientX;
+lastY = event.clientY;
+```
+
+#### 鼠标滚轮事件
+
+IE浏览器对鼠标滚轮事件的`wheelData`属性的支持不完全。在IE9及更早版本中，`wheelData`属性的值始终为120或-120。
+
+为了在IE浏览器中获取鼠标滚轮滚动的距离，可以使用以下方法：
+
+```javascript
+// 获取鼠标滚轮滚动的距离
+const delta = event.deltaY || event.wheelDelta;
+
+// 兼容 IE 浏览器
+if (event.wheelDelta) {
+  delta = -event.wheelDelta / 120;
+}
+```
+
+#### 浏览器窗口宽高
+
+IE浏览器计算浏览器窗口宽高的方式与其他浏览器不同。在IE浏览器中，`window.innerWidth`和`window.innerHeight`属性的值不包括滚动条的宽度和高度。
+
+为了在IE浏览器中获取正确的浏览器窗口宽高，可以使用以下方法：
+
+```javascript
+// 获取浏览器窗口的宽度
+const width = document.documentElement.clientWidth || document.body.clientWidth;
+
+// 获取浏览器窗口的高度
+const height = document.documentElement.clientHeight || document.body.clientHeight;
+```
+
+#### SVG字体图标
+如果不用兼容IE，那么SVG中的字体图标，可以用编码+类名使用。
+```js
+<text class="font-className">&#EC138;</text>
+```
+但是在IE里只能使用图片代替了。
