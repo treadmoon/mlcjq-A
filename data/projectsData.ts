@@ -16,7 +16,7 @@ const projectsData: Project[] = [
     title: 'canvas版结构图插件示例',
     description: ``,
     imgSrc: '/static/images/blog/color-floor.png',
-    href: '/projects/orgchart',
+    href: '/projects/svgorgchart',
   },
 ]
 
