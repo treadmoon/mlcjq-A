@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'mlcjq blog',
+  title: 'mlcjq.com',
   author: 'stukill may',
   headerTitle: '开发笔记',
   description: '记录一下怕忘了',
