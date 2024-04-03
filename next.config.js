@@ -86,6 +86,31 @@ module.exports = () => {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       })
+      // config.module.rules.push({
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader', // 将 JS 字符串生成为 style 节点
+      //     'css-loader', // 将 CSS 转化成 CommonJS 模块
+      //   ],
+      // })
+      // config.module.rules.push({
+      //   test: /\.less$/,
+      //   use: [
+      //     // 添加对 CSS 的支持
+      //     'style-loader',
+      //     // 将 JS 字符串生成为 style 节点
+      //     'css-loader',
+      //     // 将 CSS 转化成 CommonJS 模块
+      //     {
+      //       loader: 'less-loader',
+      //       options: {
+      //         lessOptions: {
+      //           // 在这里添加你的 Less 配置选项
+      //         },
+      //       },
+      //     },
+      //   ],
+      // })
 
       return config
     },

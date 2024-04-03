@@ -41,7 +41,8 @@
     ".contentlayer/generated/**/*.json",
     ".next/types/**/*.ts",
     "components/TOCInline/TOCInline.js",
-    "components/TOCInline/TOCInline.d.ts"
+    "components/TOCInline/TOCInline.d.ts",
+    "app/projects/orgchart/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
