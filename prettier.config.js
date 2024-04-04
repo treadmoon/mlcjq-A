@@ -8,5 +8,4 @@ module.exports = {
   bracketSpacing: true,
   lineEndings: 'lf',
   plugins: ['prettier-plugin-tailwindcss'],
-  ignore: ['。/plugin/kdChart.js'],
 }

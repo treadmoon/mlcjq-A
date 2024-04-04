@@ -1,4 +1,4 @@
-import d3 from '../../../../plugin/d3'
+import * as d3 from 'd3'
 // import { aiCoordinate } from "./AICoordinate";
 
 export function computedCoordinate(

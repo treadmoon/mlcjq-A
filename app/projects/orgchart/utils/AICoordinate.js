@@ -1,4 +1,4 @@
-import d3 from '../../../../plugin/d3'
+import * as d3 from 'd3'
 
 export function aiCoordinate(treeData, baseCardSize, svgWrapperSize) {
   const heightDepthMap = getHeightDepthMap(treeData)
