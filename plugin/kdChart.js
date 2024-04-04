@@ -1,4 +1,4 @@
-import * as u from 'd3'
+import u from './d3'
 const y = 1e3,
   j = 0.25,
   Z = 2,
