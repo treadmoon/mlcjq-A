@@ -6,7 +6,7 @@ import { DownOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 
 import { Button, Dropdown, Select, Space, Switch, Tooltip } from 'antd'
 
-import pbk from './img/pbk.png'
+import pbk from '../../../public/static/images/avatar.png'
 
 // 依赖d3js
 import KdChart from '../../../plugin/kdChart'
