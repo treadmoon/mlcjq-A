@@ -1,7 +1,8 @@
 .container {
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 1px 1px #aaa;
   .tool-bar {
     height: 48px;
     display: flex;

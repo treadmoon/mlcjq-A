@@ -5,9 +5,9 @@ export const baseCardSize = {
   w: width,
   h: height,
   xSpace: 24,
-  ySpace: 100,
-  xSpace2r: 38,
-  ySpace2v: 38,
+  ySpace: 60,
+  xSpace2r: 28,
+  ySpace2v: 28,
 }
 
 export const TYPE1 = Symbol('这种类型')

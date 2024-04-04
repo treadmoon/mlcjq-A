@@ -11,8 +11,9 @@ import {
 
 import { createDataPro } from './createData'
 
-import pbk from '../img/pbk.png'
-import iconSrc from '../img/kd.png'
+import iconSrc from '../../../../public/static/images/avatar.png'
+
+const avatar = '/static/images/avatar.png'
 
 const toggleBtn = [
   {
@@ -139,9 +140,8 @@ export const cardModelMap = {
       w: 56,
       h: 36,
       rx: 18,
-      url: (result) => {
-        result
-        return `${pbk}`
+      url: () => {
+        return `${avatar}`
       },
     },
     {
@@ -306,7 +306,7 @@ export const cardModelMap = {
       h: 56,
       rx: 18,
       url: () => {
-        return `${pbk}`
+        return `${avatar}`
       },
     },
     {
@@ -531,7 +531,7 @@ export const cardModelMap = {
       h: 60,
       rx: 30,
       url: () => {
-        return `${pbk}`
+        return `${avatar}`
       },
     },
     {

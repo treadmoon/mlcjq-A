@@ -97,7 +97,7 @@ function Page() {
   return (
     <div
       ref={domRef}
-      style={{ width: '99%', height: '380px', boxShadow: '0 0 1px 1px #aaa' }}
+      style={{ height: '400px', boxShadow: '0 0 1px 1px #aaa' }}
       className="chartWrapper"
       id="chartWrapper"
     ></div>
