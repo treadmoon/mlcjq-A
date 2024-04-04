@@ -1,5 +1,4 @@
-import * as d3 from 'd3'
-
+import d3 from '../../../plugin/d3'
 export class TreeChart {
   constructor({ data = {}, htmlDom, selectCardInfo, cardModel = {}, cardInfo = {} } = {}) {
     this.data = data
