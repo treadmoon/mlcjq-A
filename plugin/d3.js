@@ -1,5 +1,5 @@
 // https://d3js.org v7.4.4 Copyright 2010-2022 Mike Bostock
-const global = (function (global, factory) {
+(function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined'
     ? factory(exports)
     : typeof define === 'function' && define.amd
@@ -23041,4 +23041,4 @@ const global = (function (global, factory) {
   Object.defineProperty(exports, '__esModule', { value: true })
 })
 
-export default d3 = global.d3
+// export default d3 = global.d3
