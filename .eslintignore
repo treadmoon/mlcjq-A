@@ -2,3 +2,4 @@ node_modules
 .eslintrc.js
 components/TOCInline/TOCInline.d.ts
 components/TOCInline/TOCInline.js
+plugin

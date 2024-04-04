@@ -61,39 +61,39 @@ export const CHART_WIDTH_S12FN = {
   B: 7.0625,
   N: 9.1875,
   M: 10.796875,
-  "-": 5.15625,
-  "=": 8.421875,
-  "[": 3.65625,
-  " ": 3.5625,
-  "]": 3.65625,
-  ";": 2.890625,
+  '-': 5.15625,
+  '=': 8.421875,
+  '[': 3.65625,
+  ' ': 3.5625,
+  ']': 3.65625,
+  ';': 2.890625,
   "'": 2.78125,
-  ",": 2.890625,
-  ".": 2.890625,
-  "·": 2.890625,
-  "/": 4.75,
-  "!": 3.6875,
-  "@": 12.234375,
-  "#": 7.828125,
+  ',': 2.890625,
+  '.': 2.890625,
+  '·': 2.890625,
+  '/': 4.75,
+  '!': 3.6875,
+  '@': 12.234375,
+  '#': 7.828125,
   $: 6.6875,
-  "%": 10.171875,
-  "^": 8.421875,
-  "&": 9.03125,
-  "*": 5.265625,
-  "(": 3.65625,
-  ")": 3.65625,
+  '%': 10.171875,
+  '^': 8.421875,
+  '&': 9.03125,
+  '*': 5.265625,
+  '(': 3.65625,
+  ')': 3.65625,
   _: 5.390625,
-  "+": 8.421875,
-  "{": 3.65625,
-  "}": 3.65625,
-  ":": 2.890625,
+  '+': 8.421875,
+  '{': 3.65625,
+  '}': 3.65625,
+  ':': 2.890625,
   '"': 4.34375,
-  "&lt;": 8.421875,
-  "&gt;": 8.421875,
-  "?": 5.578125,
-  "~": 8.421875,
-  "`": 3.21875,
-};
+  '&lt;': 8.421875,
+  '&gt;': 8.421875,
+  '?': 5.578125,
+  '~': 8.421875,
+  '`': 3.21875,
+}
 
 export const CHART_WIDTH_S14FN = {
   0: 7.796875,
@@ -158,39 +158,39 @@ export const CHART_WIDTH_S14FN = {
   B: 8.234375,
   N: 10.71875,
   M: 12.59375,
-  "-": 6.015625,
-  "=": 9.828125,
-  "[": 4.265625,
-  " ": 4.15625,
-  "]": 4.265625,
-  ";": 3.359375,
+  '-': 6.015625,
+  '=': 9.828125,
+  '[': 4.265625,
+  ' ': 4.15625,
+  ']': 4.265625,
+  ';': 3.359375,
   "'": 3.234375,
-  ",": 3.359375,
-  ".": 3.359375,
-  "·": 3.359375,
-  "/": 5.546875,
-  "!": 4.3125,
-  "@": 14.28125,
-  "#": 9.140625,
+  ',': 3.359375,
+  '.': 3.359375,
+  '·': 3.359375,
+  '/': 5.546875,
+  '!': 4.3125,
+  '@': 14.28125,
+  '#': 9.140625,
   $: 7.796875,
-  "%": 11.859375,
-  "^": 9.828125,
-  "&": 10.546875,
-  "*": 6.140625,
-  "(": 4.265625,
-  ")": 4.265625,
+  '%': 11.859375,
+  '^': 9.828125,
+  '&': 10.546875,
+  '*': 6.140625,
+  '(': 4.265625,
+  ')': 4.265625,
   _: 6.28125,
-  "+": 9.828125,
-  "{": 4.265625,
-  "}": 4.265625,
-  ":": 3.359375,
+  '+': 9.828125,
+  '{': 4.265625,
+  '}': 4.265625,
+  ':': 3.359375,
   '"': 5.078125,
-  "&lt;": 9.828125,
-  "&gt;": 9.828125,
-  "?": 6.515625,
-  "~": 9.828125,
-  "`": 3.765625,
-};
+  '&lt;': 9.828125,
+  '&gt;': 9.828125,
+  '?': 6.515625,
+  '~': 9.828125,
+  '`': 3.765625,
+}
 
 export const CHART_WIDTH_S16FN = {
   0: 8.90625,
@@ -255,39 +255,39 @@ export const CHART_WIDTH_S16FN = {
   B: 9.40625,
   N: 12.25,
   M: 14.390625,
-  "-": 6.875,
-  "=": 11.234375,
-  "[": 4.875,
-  " ": 4.734375,
-  "]": 4.875,
-  ";": 3.84375,
+  '-': 6.875,
+  '=': 11.234375,
+  '[': 4.875,
+  ' ': 4.734375,
+  ']': 4.875,
+  ';': 3.84375,
   "'": 3.703125,
-  ",": 3.84375,
-  ".": 3.84375,
-  "·": 3.84375,
-  "/": 6.328125,
-  "!": 4.921875,
-  "@": 16.3125,
-  "#": 10.4375,
+  ',': 3.84375,
+  '.': 3.84375,
+  '·': 3.84375,
+  '/': 6.328125,
+  '!': 4.921875,
+  '@': 16.3125,
+  '#': 10.4375,
   $: 8.90625,
-  "%": 13.546875,
-  "^": 11.234375,
-  "&": 12.046875,
-  "*": 7.015625,
-  "(": 4.875,
-  ")": 4.875,
+  '%': 13.546875,
+  '^': 11.234375,
+  '&': 12.046875,
+  '*': 7.015625,
+  '(': 4.875,
+  ')': 4.875,
   _: 7.171875,
-  "+": 11.234375,
-  "{": 4.875,
-  "}": 4.875,
-  ":": 3.84375,
+  '+': 11.234375,
+  '{': 4.875,
+  '}': 4.875,
+  ':': 3.84375,
   '"': 5.796875,
-  "&lt;": 11.234375,
-  "&gt;": 11.234375,
-  "?": 7.4375,
-  "~": 11.234375,
-  "`": 4.296875,
-};
+  '&lt;': 11.234375,
+  '&gt;': 11.234375,
+  '?': 7.4375,
+  '~': 11.234375,
+  '`': 4.296875,
+}
 
 export const CHART_WIDTH_S12F6 = {
   0: 7.40625,
@@ -352,39 +352,39 @@ export const CHART_WIDTH_S12F6 = {
   B: 8.203125,
   N: 10.1875,
   M: 12.34375,
-  "-": 5.25,
-  "=": 9.140625,
-  "[": 4.6875,
-  " ": 3.578125,
-  "]": 4.6875,
-  ";": 3.4375,
+  '-': 5.25,
+  '=': 9.140625,
+  '[': 4.6875,
+  ' ': 3.578125,
+  ']': 4.6875,
+  ';': 3.4375,
   "'": 3.703125,
-  ",": 3.4375,
-  ".": 3.4375,
-  "·": 5.28125,
-  "/": 5.671875,
-  "!": 4.1875,
-  "@": 12.359375,
-  "#": 7.6875,
+  ',': 3.4375,
+  '.': 3.4375,
+  '·': 5.28125,
+  '/': 5.671875,
+  '!': 4.1875,
+  '@': 12.359375,
+  '#': 7.6875,
   $: 7.40625,
-  "%": 11.1875,
-  "^": 9.140625,
-  "&": 10.9375,
-  "*": 5.859375,
-  "(": 4.6875,
-  ")": 4.6875,
+  '%': 11.1875,
+  '^': 9.140625,
+  '&': 10.9375,
+  '*': 5.859375,
+  '(': 4.6875,
+  ')': 4.6875,
   _: 5.390625,
-  "+": 9.140625,
-  "{": 4.6875,
-  "}": 4.6875,
-  ":": 3.4375,
+  '+': 9.140625,
+  '{': 4.6875,
+  '}': 4.6875,
+  ':': 3.4375,
   '"': 6.265625,
-  "&lt;": 9.140625,
-  "&gt;": 9.140625,
-  "?": 5.703125,
-  "~": 9.140625,
-  "`": 4.015625,
-};
+  '&lt;': 9.140625,
+  '&gt;': 9.140625,
+  '?': 5.703125,
+  '~': 9.140625,
+  '`': 4.015625,
+}
 
 export const CHART_WIDTH_S14F6 = {
   0: 8.640625,
@@ -449,39 +449,39 @@ export const CHART_WIDTH_S14F6 = {
   B: 9.578125,
   N: 11.875,
   M: 14.40625,
-  "-": 6.125,
-  "=": 10.671875,
-  "[": 5.46875,
-  " ": 4.171875,
-  "]": 5.46875,
-  ";": 4,
+  '-': 6.125,
+  '=': 10.671875,
+  '[': 5.46875,
+  ' ': 4.171875,
+  ']': 5.46875,
+  ';': 4,
   "'": 4.328125,
-  ",": 4,
-  ".": 4,
-  "·": 6.15625,
-  "/": 6.625,
-  "!": 4.890625,
-  "@": 14.421875,
-  "#": 8.96875,
+  ',': 4,
+  '.': 4,
+  '·': 6.15625,
+  '/': 6.625,
+  '!': 4.890625,
+  '@': 14.421875,
+  '#': 8.96875,
   $: 8.640625,
-  "%": 13.046875,
-  "^": 10.671875,
-  "&": 12.765625,
-  "*": 6.828125,
-  "(": 5.46875,
-  ")": 5.46875,
+  '%': 13.046875,
+  '^': 10.671875,
+  '&': 12.765625,
+  '*': 6.828125,
+  '(': 5.46875,
+  ')': 5.46875,
   _: 6.28125,
-  "+": 10.671875,
-  "{": 5.46875,
-  "}": 5.46875,
-  ":": 4,
+  '+': 10.671875,
+  '{': 5.46875,
+  '}': 5.46875,
+  ':': 4,
   '"': 7.296875,
-  "&lt;": 10.671875,
-  "&gt;": 10.671875,
-  "?": 6.640625,
-  "~": 10.671875,
-  "`": 4.671875,
-};
+  '&lt;': 10.671875,
+  '&gt;': 10.671875,
+  '?': 6.640625,
+  '~': 10.671875,
+  '`': 4.671875,
+}
 
 export const CHART_WIDTH_S16F6 = {
   0: 9.875,
@@ -546,39 +546,39 @@ export const CHART_WIDTH_S16F6 = {
   B: 10.9375,
   N: 13.578125,
   M: 16.453125,
-  "-": 6.984375,
-  "=": 12.1875,
-  "[": 6.234375,
-  " ": 4.765625,
-  "]": 6.234375,
-  ";": 4.578125,
+  '-': 6.984375,
+  '=': 12.1875,
+  '[': 6.234375,
+  ' ': 4.765625,
+  ']': 6.234375,
+  ';': 4.578125,
   "'": 4.9375,
-  ",": 4.578125,
-  ".": 4.578125,
-  "·": 7.03125,
-  "/": 7.5625,
-  "!": 5.578125,
-  "@": 16.484375,
-  "#": 10.25,
+  ',': 4.578125,
+  '.': 4.578125,
+  '·': 7.03125,
+  '/': 7.5625,
+  '!': 5.578125,
+  '@': 16.484375,
+  '#': 10.25,
   $: 9.875,
-  "%": 14.90625,
-  "^": 12.1875,
-  "&": 14.578125,
-  "*": 7.796875,
-  "(": 6.234375,
-  ")": 6.234375,
+  '%': 14.90625,
+  '^': 12.1875,
+  '&': 14.578125,
+  '*': 7.796875,
+  '(': 6.234375,
+  ')': 6.234375,
   _: 7.171875,
-  "+": 12.1875,
-  "{": 6.234375,
-  "}": 6.234375,
-  ":": 4.578125,
+  '+': 12.1875,
+  '{': 6.234375,
+  '}': 6.234375,
+  ':': 4.578125,
   '"': 8.34375,
-  "&lt;": 12.1875,
-  "&gt;": 12.1875,
-  "?": 7.59375,
-  "~": 12.1875,
-  "`": 5.34375,
-};
+  '&lt;': 12.1875,
+  '&gt;': 12.1875,
+  '?': 7.59375,
+  '~': 12.1875,
+  '`': 5.34375,
+}
 
 /**
  * texts: string
@@ -595,104 +595,100 @@ export const CHART_WIDTH_S16F6 = {
  */
 
 export function paintTextWrap(textConfig) {
-  const textParams = computedLinesNum(textConfig);
-  const textDoms = [];
+  const textParams = computedLinesNum(textConfig)
+  const textDoms = []
 
-  let currTexts = textConfig.texts;
+  let currTexts = textConfig.texts
 
   for (let lineNO = 1; lineNO <= textParams.lineNums; lineNO++) {
-    const res = getLineTextInfo(currTexts, textConfig, textParams);
+    const res = getLineTextInfo(currTexts, textConfig, textParams)
 
-    if (textConfig.wMode === "tb") {
+    if (textConfig.wMode === 'tb') {
       textDoms.push({
         text: res.txt,
         x: textConfig.x + (lineNO - 1 / 2) * textConfig.fontSize,
         y: textConfig.y,
         len: res.txtWidth,
-      });
+      })
     } else {
       textDoms.push({
         text: res.txt,
         x: textConfig.x,
         y: textConfig.y + lineNO * textConfig.fontSize,
         len: res.txtWidth,
-      });
+      })
     }
 
-    currTexts = res.restText;
+    currTexts = res.restText
 
     if (currTexts.length == 0) {
-      break;
+      break
     }
   }
 
   textDoms.map((txtItem) => {
-    const [shiftX, shiftY] = computedLoc(
-      textConfig,
-      txtItem.len,
-      textDoms.length
-    );
+    const [shiftX, shiftY] = computedLoc(textConfig, txtItem.len, textDoms.length)
 
-    txtItem.x += shiftX;
-    txtItem.y += shiftY;
-  });
+    txtItem.x += shiftX
+    txtItem.y += shiftY
+  })
 
-  let isEllipsis = currTexts.length > 0;
+  let isEllipsis = currTexts.length > 0
 
   if (isEllipsis) {
-    let txt = textDoms[textDoms.length - 1].text;
-    textDoms[textDoms.length - 1].text = txt.substr(0, txt.length - 1) + "…";
+    let txt = textDoms[textDoms.length - 1].text
+    textDoms[textDoms.length - 1].text = txt.substr(0, txt.length - 1) + '…'
   }
 
-  return { textDoms, isEllipsis };
+  return { textDoms, isEllipsis }
 }
 
 function computedLoc(textConfig, len, realLines) {
-  let shiftY = 0;
-  let shiftX = 0;
+  let shiftY = 0
+  let shiftX = 0
 
-  if (textConfig.wMode === "tb") {
+  if (textConfig.wMode === 'tb') {
     // 横向偏移
-    shiftX = (textConfig.w - realLines * textConfig.fontSize) / 2;
+    shiftX = (textConfig.w - realLines * textConfig.fontSize) / 2
 
     // 纵向偏移
     switch (textConfig.valign) {
-      case "center":
-        shiftY = (textConfig.h - len) / 2;
-        break;
-      case "bottom":
-        shiftY = textConfig.h - len;
-        break;
+      case 'center':
+        shiftY = (textConfig.h - len) / 2
+        break
+      case 'bottom':
+        shiftY = textConfig.h - len
+        break
     }
   } else {
     // 纵向偏移
     switch (textConfig.valign) {
-      case "center":
-        shiftY = (textConfig.h - realLines * textConfig.fontHeight) / 2;
-        break;
-      case "bottom":
-        shiftY = textConfig.h - realLines * textConfig.fontHeight;
-        break;
+      case 'center':
+        shiftY = (textConfig.h - realLines * textConfig.fontHeight) / 2
+        break
+      case 'bottom':
+        shiftY = textConfig.h - realLines * textConfig.fontHeight
+        break
     }
 
     // 横向偏移
     switch (textConfig.textAnchor) {
-      case "middle":
-        shiftX = (textConfig.w - len) / 2;
-        break;
-      case "end":
-        shiftX = textConfig.w - len;
-        break;
+      case 'middle':
+        shiftX = (textConfig.w - len) / 2
+        break
+      case 'end':
+        shiftX = textConfig.w - len
+        break
     }
   }
 
-  return [shiftX, shiftY];
+  return [shiftX, shiftY]
 }
 
 function getLineTextInfo(currTexts, textConfig, textParams) {
-  let txt = "";
-  let step = 0;
-  let txtWidth = 2;
+  let txt = ''
+  let step = 0
+  let txtWidth = 2
 
   for (; step < currTexts.length; step++) {
     const charWidth = getChartWidth(
@@ -700,12 +696,12 @@ function getLineTextInfo(currTexts, textConfig, textParams) {
       textConfig.fontSize,
       textConfig.fontWeight,
       textConfig.wMode
-    );
+    )
     if (txtWidth + charWidth <= textParams.textLineWidth) {
-      txt += currTexts[step];
-      txtWidth += charWidth;
+      txt += currTexts[step]
+      txtWidth += charWidth
     } else {
-      break;
+      break
     }
   }
 
@@ -713,76 +709,76 @@ function getLineTextInfo(currTexts, textConfig, textParams) {
     txt,
     txtWidth,
     restText: currTexts.slice(step),
-  };
+  }
 }
 
-function getChartWidth(chartCode = "", fontSize = 14, fontWeight = 500) {
-  let width = 0;
+function getChartWidth(chartCode = '', fontSize = 14, fontWeight = 500) {
+  let width = 0
 
   if (chartCode.charCodeAt(0) > 255) {
-    width = fontSize;
+    width = fontSize
   } else {
-    let cwType = "S" + fontSize + "F" + (fontWeight >= 600 ? "6" : "N");
+    let cwType = 'S' + fontSize + 'F' + (fontWeight >= 600 ? '6' : 'N')
     switch (cwType) {
-      case "S12FN":
-        width = CHART_WIDTH_S12FN[chartCode];
+      case 'S12FN':
+        width = CHART_WIDTH_S12FN[chartCode]
 
-        break;
-      case "S14FN":
-        width = CHART_WIDTH_S14FN[chartCode];
-        break;
-      case "S16FN":
-        width = CHART_WIDTH_S16FN[chartCode];
-        break;
-      case "S12F6":
-        width = CHART_WIDTH_S12F6[chartCode];
-        break;
-      case "S14F6":
-        width = CHART_WIDTH_S14F6[chartCode];
-        break;
-      case "S16F6":
-        width = CHART_WIDTH_S16F6[chartCode];
-        break;
+        break
+      case 'S14FN':
+        width = CHART_WIDTH_S14FN[chartCode]
+        break
+      case 'S16FN':
+        width = CHART_WIDTH_S16FN[chartCode]
+        break
+      case 'S12F6':
+        width = CHART_WIDTH_S12F6[chartCode]
+        break
+      case 'S14F6':
+        width = CHART_WIDTH_S14F6[chartCode]
+        break
+      case 'S16F6':
+        width = CHART_WIDTH_S16F6[chartCode]
+        break
     }
   }
 
-  return width;
+  return width
 }
 
 export function getStrWidth(str, fontSize = 12, fontWeight = 100) {
-  let len = 1;
+  let len = 1
   for (let i = 0; i < str.length; i++) {
-    len += getChartWidth(str[i], fontSize, fontWeight);
+    len += getChartWidth(str[i], fontSize, fontWeight)
   }
 
-  return len;
+  return len
 }
 
 function computedLinesNum(params) {
-  let textLineWidth = 0;
-  let lineNums = 0;
+  let textLineWidth = 0
+  let lineNums = 0
 
-  if (params.wMode === "tb") {
-    textLineWidth = params.h;
-    lineNums = Math.floor(params.w / params.fontSize);
+  if (params.wMode === 'tb') {
+    textLineWidth = params.h
+    lineNums = Math.floor(params.w / params.fontSize)
   } else {
-    textLineWidth = params.w;
-    lineNums = Math.floor(params.h / params.fontHeight);
+    textLineWidth = params.w
+    lineNums = Math.floor(params.h / params.fontHeight)
   }
 
   return {
     textLineWidth,
     lineNums,
-  };
+  }
 }
 
 export function resolveParams(param, defaultVal, data) {
-  let res = defaultVal;
-  if (param === null || param === undefined) return res;
-  if (typeof param === "function") {
-    res = param(data);
+  let res = defaultVal
+  if (param === null || param === undefined) return res
+  if (typeof param === 'function') {
+    res = param(data)
   } else {
-    res = param;
+    res = param
   }
-  return res;
+  return res
 }

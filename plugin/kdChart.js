@@ -3090,23 +3090,24 @@ class Zt {
    * 设置一些属性
    */
   setData(t = '', e) {
-    var h
-    if (!(((h = this.chartDataApp) == null ? void 0 : h.chartData) ?? null)) return
-    if (t === '') return ''
-    const { top: r = 0, right: a = 0, bottom: i = 0, left: p = 0 } = e
-    switch (t) {
-      case 'preViewPostion':
-        r && this.preViewApp.previewWrapper.style('top', r),
-          a && this.preViewApp.previewWrapper.style('right', a),
-          i && this.preViewApp.previewWrapper.style('bottom', i),
-          p && this.preViewApp.previewWrapper.style('top', p)
-        break
-      case 'editStatus':
-        this.editStatus = e
-        break
-      case 'direction':
-        this.direction = e ?? x.bottom
-        break
+    var r
+    if (((r = this.chartDataApp) == null ? void 0 : r.chartData) ?? null) {
+      if (t === '') return ''
+      switch (t) {
+        case 'preViewPostion':
+          const { top: a, right: i, bottom: p, left: h } = e
+          a && this.preViewApp.previewWrapper.style('top', a),
+            i && this.preViewApp.previewWrapper.style('right', i),
+            p && this.preViewApp.previewWrapper.style('bottom', p),
+            h && this.preViewApp.previewWrapper.style('top', h)
+          break
+        case 'editStatus':
+          this.editStatus = e
+          break
+        case 'direction':
+          this.direction = e ?? x.bottom
+          break
+      }
     }
   }
 }

@@ -6,5 +6,7 @@ module.exports = {
   useTabs: false,
   trailingComma: 'es5',
   bracketSpacing: true,
+  lineEndings: 'lf',
   plugins: ['prettier-plugin-tailwindcss'],
+  ignore: ['。/plugin/kdChart.js'],
 }

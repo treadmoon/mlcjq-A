@@ -9,7 +9,7 @@ import { Button, Dropdown, Select, Space, Switch, Tooltip } from 'antd'
 import pbk from './img/pbk.png'
 
 // 依赖d3js
-import KdChart from '../../../scripts/kdChart'
+import KdChart from '../../../plugin/kdChart'
 
 import { createDataPro } from './utils/createData'
 
@@ -431,20 +431,12 @@ function Index() {
           }}
         >
           {!isEdit && (
-            <ul
-              onClick={(e) => {
-                console.log(e)
-              }}
-            >
+            <ul>
               <li>详</li>
             </ul>
           )}
           {isEdit && (
-            <ul
-              onClick={(e) => {
-                console.log(e)
-              }}
-            >
+            <ul>
               <li>删</li>
               <li>增</li>
             </ul>

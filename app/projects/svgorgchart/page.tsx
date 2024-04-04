@@ -3,11 +3,11 @@ import React, { useEffect, useRef } from 'react'
 import { realData } from './data'
 import { TreeChart } from './gang'
 
-function page() {
+function Page() {
   const domRef = useRef(null)
 
   useEffect(() => {
-    let kdChart = new TreeChart({
+    const kdChart = new TreeChart({
       data: realData, //realData
       htmlDom: domRef.current,
       selectCardInfo: (node) => (node.data['name'].indexOf('公司') >= 0 ? 'cai' : 'normal'),
@@ -104,4 +104,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

@@ -1,27 +1,27 @@
 export function getDownConfig(itChart, rotateLevel, altImg) {
-  const chartData = itChart.chartDataApp.chartData;
-  const nodeList = [];
-  const linkList = [];
+  const chartData = itChart.chartDataApp.chartData
+  const nodeList = []
+  const linkList = []
 
-  each(chartData);
+  each(chartData)
 
   function each(root) {
-    nodeList.push(getDownNode(root));
+    nodeList.push(getDownNode(root))
 
     if (root.children && root.children.length > 0) {
-      root.children.map(child => {
+      root.children.map((child) => {
         linkList.push({
           source: getDownNode(root),
           target: getDownNode(child),
-        });
-        each(child);
-      });
+        })
+        each(child)
+      })
     }
   }
 
-  const { cardModelMap, maxLoc, minLoc } = itChart.mainViewApp;
-  const { baseCardSize, direction } = itChart;
-  const rootNode = getDownNode(chartData);
+  const { cardModelMap, maxLoc, minLoc } = itChart.mainViewApp
+  const { baseCardSize, direction } = itChart
+  const rootNode = getDownNode(chartData)
 
   return {
     nodeList,
@@ -34,7 +34,7 @@ export function getDownConfig(itChart, rotateLevel, altImg) {
     direction,
     altImg,
     rotateLevel,
-  };
+  }
 }
 
 function getDownNode(node) {
@@ -55,5 +55,5 @@ function getDownNode(node) {
     cardModel: node.cardModel,
     x: node.x,
     y: node.y,
-  };
+  }
 }

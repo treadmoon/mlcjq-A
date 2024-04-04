@@ -380,11 +380,11 @@ class paintCanvas {
   clearRectCanvas() {
     this.gangCtx.fillRect(-99999, -99999, 999999, 999999)
     this.gangCtx.clearRect(-99999, -99999, 999999, 999999)
-    this.gangCtx.width = this.gangCtx.width
+    // this.gangCtx.width = this.gangCtx.width
 
     this.colorCtx.fillRect(-99999, -99999, 999999, 999999)
     this.colorCtx.clearRect(-99999, -99999, 999999, 999999)
-    this.colorCtx.width = this.colorCtx.width
+    // this.colorCtx.width = this.colorCtx.width
   }
   rect(canvasObj) {
     let config = canvasObj.config
