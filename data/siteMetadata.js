@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'mlcjq.com',
   author: 'stukill may',
   headerTitle: '开发笔记',
-  description: '记录一下怕忘了',
+  description: '给我记着',
   language: 'zh_CN',
   theme: 'system', // system, dark or light
   siteUrl: 'http://mlcjq.com', //线上地址

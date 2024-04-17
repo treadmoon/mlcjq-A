@@ -1,0 +1,12 @@
+.article-box{
+    .title{
+        color: #171717;
+    }
+}
+
+.titleTag{
+    background-color: #00ff8c;
+    color: #fff;
+    padding: 1px 4px;
+    border-radius: 16px;
+}

@@ -1,0 +1,22 @@
+.iTag{
+    /* color: #212121; */
+    background-color: #71ea8b1a;
+    padding: 2px 4px;
+    font-size:12px
+}
+
+.iTag .icon{
+    color: #71ea8b;
+}
+
+.iTag:nth-child(odd) .icon{
+    color: #eaac71;
+}
+
+.iTag:nth-child(1) .icon{
+    color: #3b49df;
+}
+
+.iTag:nth-child(2) .icon{
+    color: #ea71e4;
+}
