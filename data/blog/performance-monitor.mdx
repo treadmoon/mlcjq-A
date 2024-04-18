@@ -1,26 +1,73 @@
 ---
-title: '性能实践：监控'
-date: '2020-04-15'
-lastmod: '2020-04-15'
+title: '前端监控之捕获错误'
+date: '2021-06-23'
+lastmod: '2024-04-15'
 tags: ['performance']
 draft: false
-summary: '性能实践：监控'
+summary: '前端监控之捕获错误'
 images: ['/static/images/twitter-card.png']
 ---
 
-## 需求
-
-
 ## 现状
 
+公司做的是SAAS管理软件，每天都有成百上千的的客户提单（软件出问题了提的售后单），接单的同事又叫提单开发（手动狗头）。
+解决提单本身并不难，难得是如何正确理解客户的需求，以及正确和快速定位问题所在。这个时候，监控就很重要了。
 
 ## 思路
 
+那么，我们要做的就是收集用户行为，以及报错原因。那么，前端如何收集报错信息呢？
 
-## 难点
+1. `try/catch`是我们常用的一种方式，能捕获代码运行错误，但是语法错误和异步错误不能捕获到。如：
 
+```js
+try {
+  let a
+  let a
+} catch() {
 
-## 实现
+}
 
+try {
+  setTimeout(() => {
+    console.log(a);
+  }, 0)
+} catch(e) {
 
-## 总结
+}
+```
+
+2. `window.addEventListener('error',cb)`是一种监听全局错误事件的方式。当在JavaScript运行时发生错误，并且这个错误没有被try/catch语句捕获时，就会触发一个error事件。
+
+```js
+window.addEventListener('error', function (event) {
+  console.error('捕获到全局错误:', event)
+})
+```
+
+3. `window.onerror`是 JavaScript 中用于全局错误处理的一个属性，而不是一个事件。他有很多局限性：
+   - 不能捕获资源加载错误（如 `<img>` 标签的 onerror 事件）或某些跨域脚本中的错误。
+   - 某些现代浏览器可能会限制或修改传递给 window.onerror 的参数，以防止敏感信息的泄露。
+   - 返回 true 可以阻止浏览器默认的错误处理机制
+
+```js
+window.onerror = function (message, source, lineno, colno, error) {
+  // colno: 发生错误的列号 (某些浏览器可能不支持)
+  // error: 原始的 Error 对象 (某些浏览器可能不支持)
+  console.error('捕获到全局未捕获错误:', message, '在', source, '的第', lineno, '行')
+  // 返回 true 阻止浏览器默认的错误处理机制（例如显示一个标准错误消息）
+  return true
+}
+```
+
+4. `Promise`常用于手动创建失败的 Promise，或者在 async 函数中用于提前退出并返回一个失败的 Promise。抛出的错误要用可通过 unhandledrejection 事件来处理：
+
+```js
+window.addEventListener('unhandledrejection', function (e) {
+  console.log('捕获到异常', e)
+  e.preventDefault()
+})
+```
+
+5. 除了上述方法，在特定框架，也有特定的捕获错误方式。如React，官方提供了 `ErrorBoundary` ,Vue提供了`Vue.config.errorHandler`
+
+记录错误，上报至日志，定位问题就快多了。当前，捕获错误只是其中一部分，市面上的监控软件还会记录用户行为甚至录屏，记录页面性能等。
