@@ -8,121 +8,135 @@ summary: '结构图插件系列：设计模式的应用'
 images: ['/static/images/twitter-card.png']
 ---
 
-
 ## 常用的设计模式有哪些？
-常用的JavaScript设计模式包括工厂模式、单例模式、观察者模式、策略模式、装饰者模式等。
+
+常用的JavaScript设计模式包括工厂模式、单例模式、观察者模式、策略模式、装饰者模式等。我在结构图插件中用到了哪些呢？
+
+<TOCInline toc={props.toc} />
 
 #### 单例模式
+
 - 单例模式：提示框（tips），文字超长提示、悬浮标题等。
-以下是文字超长提示，关于单例的主要代码：
+  以下是文字超长提示，关于单例的主要代码：
+
 ```js
 class TextTips {
   constructor() {
     if (!TextTips.instance) {
-     this.initTipsGroup();
-      TextTips.instance = this;
+      this.initTipsGroup()
+      TextTips.instance = this
     }
-    return TextTips.instance;
+    return TextTips.instance
   }
 
   initTipsGroup() {
     // TODO
   }
 
-  showTipsCard(params){
+  showTipsCard(params) {
     // TODO
   }
 
-  hideTipsGroup(){
+  hideTipsGroup() {
     // TODO
   }
 }
 ```
 
 #### 策略模式
+
 - 策略模式：计算卡片坐标、计算卡片连线。
-下面是计算卡片坐标的部分代码：
+  下面是计算卡片坐标的部分代码：
+
 ```js
 switch (layoutType) {
-    // 平铺
-    case 1:
-        return childloadType(chartData);
-    // 双列
-    case 2:
-        return childloadTypeDouble(chartData);
-    // 单列
-    case 3:
-        return childloadTypeSingle(chartData);
-    //纵向;
-    case 4:
-        return childloadTypeVertical(chartData);
+  // 平铺
+  case 1:
+    return childloadType(chartData)
+  // 双列
+  case 2:
+    return childloadTypeDouble(chartData)
+  // 单列
+  case 3:
+    return childloadTypeSingle(chartData)
+  //纵向;
+  case 4:
+    return childloadTypeVertical(chartData)
 }
 ```
 
 #### 代理模式
+
 - 代理模式：加载图片、卡片骨架占位。
+
 ```js
 class PaintCard {
-    loadData(){}
-    paint(){}
+  loadData() {}
+  paint() {}
 }
 class CardProxy {
-    constructor(paintCard){
-        this.paintCard = paintCard;
-    }
-    paint(){
-        // TODO
-        ready().then(()=>{
-            this.paintCard.paint()
-        })
-    }
-    ready(){
-        // TODO
-        return this.loadData();
-    }
+  constructor(paintCard) {
+    this.paintCard = paintCard
+  }
+  paint() {
+    // TODO
+    ready().then(() => {
+      this.paintCard.paint()
+    })
+  }
+  ready() {
+    // TODO
+    return this.loadData()
+  }
 }
 ```
 
 #### 装饰者模式
+
 - 装饰者模式：各种用户自定义拦截规则、用户监听回调。
   这个简单，直接用`ts`的`Decorator`
+
 ```js
-class MainView{
-    @beforePaint()
-    paint(){
-        // TODO
-    }
+class MainView {
+  @beforePaint()
+  paint() {
+    // TODO
+  }
 }
 ```
 
 #### 组合模式
+
 - 组合模式：组装完整卡片等。
+
 ```js
-class PaintCard{
-    constructor(){
-        this.cardDom=[]
-    }
-    add(){
-        // TODO
-    }
-    addText(){
-        // TODO
-    }
-    addRect(){
-        // TODO
-    }
-    addImg(){
-        // TODO
-    }
+class PaintCard {
+  constructor() {
+    this.cardDom = []
+  }
+  add() {
     // TODO
-    paint(){
-        // TODO
-    }
+  }
+  addText() {
+    // TODO
+  }
+  addRect() {
+    // TODO
+  }
+  addImg() {
+    // TODO
+  }
+  // TODO
+  paint() {
+    // TODO
+  }
 }
 ```
 
 #### 工厂模式：
+
 - 工厂模式：造各类显示元素
+
 ```js
 class TextDom{}
 
@@ -143,7 +157,9 @@ class SVGDomFactory{
 ```
 
 #### 发布订阅
+
 - 发布订阅：大量用于事件监听和回调，使用户和插件交互主要方式。
+
 ```js
 
 export class ListenEvent {
@@ -168,4 +184,3 @@ export class ListenEvent {
   }
 }
 ```
-

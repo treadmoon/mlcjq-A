@@ -2,13 +2,16 @@
 title: '结构图插件系列：导出PPT'
 date: '2021-08-03'
 lastmod: '2021-08-03'
-tags: ['plugin', 'chart','ppt']
+tags: ['plugin', 'chart', 'ppt']
 draft: false
 summary: '结构图插件系列：导出PPT'
 images: ['/static/images/twitter-card.png']
 ---
 
+<TOCInline toc={props.toc} />
+
 #### PPT文件构造
+
 想在ppt内绘制组织结构图，就要了解ppt文件的组成和构造。我们把ppt后缀改成.zip，然后解压缩，得到如下所示若干文件：
 
 <img src="/static/images/blog/ppt3.png" />
@@ -16,14 +19,15 @@ images: ['/static/images/twitter-card.png']
 <img src="/static/images/blog/ppt1.png" />
 
 大概查了下文档，以下是PPT文件的主要XML文件：
+
 - **presentation.xml**：存储演示文稿的基本信息，例如幻灯片顺序、主题、幻灯片母版等。
+
 * **slide**.xml：存储每个幻灯片的内容，例如文本、形状、图片、视频等。
 * **notes**.xml：存储幻灯片的备注。
 * **handout**.xml：存储幻灯片的讲义。
 * **theme**.xml：存储演示文稿的主题信息。
 * **styles**.xml：存储演示文稿的样式信息。
-* **settings**.xml：存储演示文稿的设置信息。                
-
+* **settings**.xml：存储演示文稿的设置信息。
 
 #### 分析**slide**.xml
 
@@ -39,7 +43,9 @@ images: ['/static/images/twitter-card.png']
 下面就来分析一下这个xml结构
 
 #### 文本
+
 通过分析`XML`可以获取文字基本构成属性：`id x y fontSize fontWeight color 文`本。
+
 ```xml
 <p:sp>
     <!-- id -->
@@ -88,7 +94,9 @@ images: ['/static/images/twitter-card.png']
 ```
 
 #### 图片
+
 通过分析`XML`可以获取图片基本构成属性：`id x y src`。
+
 ```xml
 <p:pic>
     <p:nvPicPr>
@@ -119,7 +127,9 @@ images: ['/static/images/twitter-card.png']
 ```
 
 #### 矩形
+
 可通过空白的文本框代替，设置`fill`（填充） `line`（边框）
+
 ```xml
 <!-- fill -->
 <a:solidFill>
@@ -135,8 +145,10 @@ images: ['/static/images/twitter-card.png']
 ```
 
 #### 肘线
+
 肘线（可连续拐弯的线）,绘制肘线需要：
 来源（`stCxn`）、目标（`endCxn`）、连接点（上下左右）、拐弯点（百分比）。
+
 ```xml
 <p:nvCxnSpPr>
     <p:cNvPr id="5" name="肘形连接符 30" descr="肘形连接符5" />
@@ -167,8 +179,10 @@ images: ['/static/images/twitter-card.png']
 ```
 
 #### 组合
+
 画出来的元素时松散的，我们需要组合起来，才会在查看操作的时候，不至于乱成一团。
 用组合标签`grpSp`将其他内容包裹起来，组合标签的属性`grpSpPr`中，可以设置坐标、宽高。
+
 ```xml
 <p:grpSp>
     <p:nvGrpSpPr>

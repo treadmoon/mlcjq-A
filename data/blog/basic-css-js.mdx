@@ -1,0 +1,203 @@
+---
+title: '前端基础能解决的没必要折腾'
+date: '2024-04-24'
+lastmod: '2024-04-24'
+tags: ['css', 'scroll', 'chart']
+draft: false
+summary: '前端基础能解决的没必要折腾'
+images: ['/static/images/twitter-card.png']
+---
+
+## 起因
+
+最近看了掘金一盘文章《别忘了前端是靠什么起家的》，想起自己的组员也是有类似情况。代码评审时，着实惊呆我了，列举三个例子。
+
+<TOCInline toc={props.toc} />
+
+## 一个移动端的布局
+
+需求类似下图，原型区域放头像，下边矩形放其他信息。（下图其实就是我做出来的效果了）
+
+<Image
+  src="/static/images/blog/m-layout.png"
+  alt="Picture of the author"
+  width={600}
+  height={300}
+/>
+
+组员怎么做呢，用一个圆和一个矩形拼接，可是UI不让过啊：
+
+1. 拼接处没有圆角
+2. 拼接处内陷
+
+结果，还硬是给他拼凑出来了，再加两个小圆（遮挡作用），大概如下图。
+
+<Image
+  src="/static/images/blog/m-layout2.png"
+  alt="Picture of the author"
+  width={600}
+  height={300}
+/>
+
+事实上，我们用一个圆+一个矩形确实可以拼接，只不过要加一个属性`filter`，可以理解为融合效果：
+
+```css
+.container {
+  height: 300px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: contrast(30);
+}
+
+.circle {
+  border-radius: 50%;
+  position: absolute;
+  /* 给融合元素设置blur */
+  filter: blur(10px);
+}
+
+.circle-1 {
+  height: 90px;
+  width: 311px;
+  background: #000;
+  transform: translate(-50px);
+  border-radius: 0px;
+}
+
+.circle-2 {
+  height: 90px;
+  width: 90px;
+  background: #000;
+  transform: translate(-49px, -60px);
+}
+```
+
+```HTML
+<div class="container">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+</div>
+```
+
+## 一个横向滚动
+
+也是一个移动端的布局，横向一排大按钮，点到哪个按钮，哪个按钮就居中显示。组员一通操作着实又惊到我了，反正他用了复杂的`js`运算。
+其实原生的`scrollIntoView`就可以实现啊：
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>锚点</title>
+    <style>
+        .box2 {
+            width: 400px;
+            height: 100px;
+            overflow: auto;
+        }
+
+        .item2 {
+            width: 80px;
+            height: 60px;
+            display: inline-block;
+            margin: 5px 0;
+            background: #ccc;
+        }
+
+        .inbox {
+            width: 999px;
+            padding-left: 160px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box2" id="box2">
+        <div class="inbox" id="inbox">
+            <div class="item2" id="x1">x1</div>
+            <div class="item2" id="x2">x2</div>
+            <div class="item2" id="x3">x3</div>
+            <div class="item2" id="x4">x4</div>
+            <div class="item2" id="x5">x5</div>
+            <div class="item2" id="x6">x6</div>
+            <div class="item2" id="x7">x7</div>
+            <div class="item2" id="x8">x8</div>
+            <div class="item2" id="x9">x9</div>
+        </div>
+    </div>
+</body>
+<html>
+
+<script>
+    document.getElementById("inbox").onclick = e => {
+        e.target.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+        });
+    };
+</script>
+```
+
+是不是很简单，翻翻`MDN`文档就好了。
+
+## 圆角梯形
+
+效果如下图吧（我画出来的效果）：
+
+<Image src="/static/images/blog/tixing.png" alt="Picture of the author" width={600} height={300} />
+
+组员又是一顿`css`旋转+拼凑大法，整出来了：画2个三角形旋转角度+一个矩形+严密的计算。但看着始终怪怪的，尤其是衔接处的圆角。
+其实不用折腾，只要用`css`的`transform: skew`属性就好了，2个斜边矩形组合：
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .trapezoidbox {
+        margin: 30px auto;
+        width: 80px;
+        position: relative;
+      }
+
+      .trapezoidbox > div {
+        background-color: #aaa;
+        position: absolute;
+      }
+
+      .trapezoid1 {
+        width: 60px;
+        height: 30px;
+        border-radius: 0 0 0 6px;
+        transform: skew(20deg, 0);
+        left: 0;
+      }
+
+      .trapezoid2 {
+        width: 60px;
+        height: 30px;
+        border-radius: 0 0 6px 0;
+        transform: skew(-20deg, 0);
+        right: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="trapezoidbox">
+      <div class="trapezoid1"></div>
+      <div class="trapezoid2"></div>
+    </div>
+  </body>
+</html>
+```
