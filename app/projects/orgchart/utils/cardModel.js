@@ -88,6 +88,7 @@ const toggleBtn = [
     rx: 8,
     class: 'outcard',
     fillOpacity: () => 0,
+    strokeOpacity: () => 0,
     show: ({ node }) => {
       return !!node.data.hasChild
     },
